@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch4 Miner Dwarf</title>
+</head>
+<style>
+    body{
+    background-color:rgb(100, 100, 100);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <img src="./cave.png" alt="" style="height: 270px; position: relative; left: 20%;">
+    <br><br>
+    <p>進入礦坑後，一個極大的黑影出現在岔路，外型彷彿是一個小矮人的輪廓 <br>After entering the mine, a huge shadow appeared at the fork in the road, its shape resembling the outline of a dwarf.</p> <br>
+    <div id="talk1" style="text-align: center;">"歐，愚蠢的人類啊，你來到此地有什麼目的呢!" <br>"Oh, foolish human, what brings you to this place?"</div>
+    <div>
+    <button id="reply1">我想要進入小矮人的世界 <br>To enter the land of dwarf </button>
+    </div>
+
+    <div id="talk2" style="display: none; text-align: center;">"想要進入小矮人的世界，必須要付出代價!!" <br> "To enter, a price must be paid!!" <br>
+        <div><button id="reply2">我準備好了 <br>I'm ready</button></div>
+    </div>
+
+    <div id="talk3" style="display: none; text-align: center;">
+        <br><br><br>
+        <strong>"你的考驗開始了...!" <br> "Your trial has begun...!"</strong>  <br><br><br>
+        "在我們的地鐵裡...每兩站之間的路線中間設有一盞路燈..." <br> "In our subway... there is a streetlight between each two stations along the route...." <br><br>
+        "沒有人能夠從頭到尾一次關掉所有的燈...每天都有一個小矮人員工迷失在黑暗的地鐵裡..." <br> "No one can turn off all the lights from start to finish at once... Every day, an dwarf employee gets lost in the darkness of the subway..."<br><br>
+        "你必須找出一條路線取消來避免這件事再度發生...." <br> "You must find a route to cancel in order to prevent this from happening again..." <br><br>
+        <br>
+
+
+        <img src="metro map.png" alt="" style="width: 60%; position: relative; left: 0%">
+
+    <div>
+        <br>
+        <label for="fname" style="color: white;">請輸入路線兩端的站名. Please enter the names of the two stations of the route(ex: S01S02): </label>
+        <input type="text" id="fname">
+    </div>
+
+    
+        
+    
+    <div>
+        <br>
+        <button id="sub">Submit</button>
+    </div>
+    </div>
+    
+
+
+
+    <p><br><br>
+
+
+        
+        
+    </p>
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./mine.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">巨大的黑影頓時消失，你在一旁的角落發現一頂深藍色的矮人帽子 <br>The shadow vanishes, and you find a dark blue hat at the corner <br>
+            <br>
+            獲得 深藍色矮人帽子 <br> Get Dark blue dwarf hat
+        <br><br>
+        </p>
+        <div style="left: 50%;">
+            <button id="hideButton" >Confirm</button>
+        </div>
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./5 d info.png" alt="" class="item" id="address">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="addressi" class="itinfo">The info of the five dwarfs. 五個小矮人的資訊 <br><button class="btn" id="addressb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    <div class="wm" id="addressw">
+        似乎沒有作用... <br>
+        It doesn't work now...
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var talk2 = document.getElementById("talk2");
+        var talk3 = document.getElementById("talk3");
+        var audioPlayed = false;  // Track if audio has already been played
+        var fname = document.getElementById("fname").value;
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(50, 150, 200)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        subButton.addEventListener("click", function() {
+            var fname = document.getElementById('fname').value;
+            if(fname == "F04F05" || fname == "F05F04"){
+                // Display a warning message as an alert box
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+            }
+            else{
+                alert("這個方法沒有作用，又一位小矮人消失了...That doesn't work. We lost another dwarf in the MRT system...")
+            }
+
+            
+        });
+
+
+
+
+
+
+        // reply button be clicked
+        reply1.addEventListener("click", function() {
+            talk2.style.display = "block";
+        });
+
+        reply2.addEventListener("click", function() {
+            talk3.style.display = "block";
+        });
+
+
+
+
+
+
+            
+
+        hideButton.addEventListener("click", function() {
+            
+            // Hide the text box
+            warningMessage.style.display = "none";
+            audio.play();
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./ch5.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        var addresst = document.getElementById('addressi');
+        var addressi = document.getElementById('address')
+        var addressb = document.getElementById('addressb')
+        var addressw = document.getElementById('addressw')
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        //
+        addressi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            addresst.style.display = "block";
+        });
+
+        
+
+        addressb.addEventListener("click", function() {
+            addressw.style.display = "block";
+            setTimeout(function() {
+                addressw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
