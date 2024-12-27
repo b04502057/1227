@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch10 Craobh</title>
+</head>
+<style>
+    body{
+    background-color:rgb(3, 99, 253);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <img src="./brown word.png" alt="" style="height: 270px; position: relative; left: 20%;">
+    <br><br>
+    <div id="talk1" style="text-align: center;">Craobh正在河上漂流... <br>Craobh is floating on the river... <br></div>
+    <div>
+        <br>
+        <button id="reply1">攔住他 <br> Stop him</button>
+    </div>
+
+    <p id="intro" style="display: none;"></p>
+
+    <div id="talk2" style="display: none; text-align: center;">Craobh沒有要下船的意思，他就這樣看著你... <br>Craobh is not going to leave his boat. He is just watching you... <br>
+        <div><button id="reply2">想問你戒指的事 <br>Ask him about the ring</button></div>
+    </div>
+
+
+    <div id="talk3" style="display: none; text-align: center;">
+        <br>
+        "可以啊" <br>"Okay"<br><br>
+        "不過要先等一等"<br>"But maybe later"<br><br>
+        "我在想為什麼我沒辦法把河流好好的畫出來"<br>"I'm wondering that why I can't draw the river correctly" <br><br>
+        Croabh很喜歡河流，他想在家裡牆壁上也畫出河流 <br>Craobh loves river. He wants to draw a river in his house <br><br>
+        他每75cm對每100cm一次的水波取出高度，再回家畫出來，但圖形非常奇怪 <br>To draw it correctly, he measure the height of the wave per 75cm of a wave with 100cm wave length. But the shape of the outcome is much wider than the real scene <br><br>
+        <img src="./wave2.png" alt="" style="width: 30%;"><br><br>Craobh想知道至少多長的距離要取樣一次才會正確 <br>Craobh wants to know how far apart the sampling intervals should be to ensure accuracy<br><br>
+
+        <label for="fname" style="color: white;">最短取樣距離 Minimum length of sampling interval (cm)(ex:200): </label>
+        <input type="text" id="fname">
+        <div>
+            <br>
+            <button id="sub">Submit</button>
+        </div>
+    </div>
+    
+
+
+
+    <p><br><br>
+
+
+        
+        
+    </p>
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">Craobh滿意地留下紙條後繼續往下游流去了..... <br>Craobh left a note with satisfaction and continued to flow downstream... <br>
+            <br><br>
+            
+            獲得 Craobh的線索 <br> Get the clues from Craobh
+        
+        </p>
+        <div style="left: 50%;">
+            <button id="hideButton" >Confirm</button>
+        </div>
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./yellow clue.png" alt="" class="item" id="yc">
+        <img src="./hammer.png" alt="" class="item" id="hac">
+        <img src="./gold.png" alt="" class="item" id="g">
+        <img src="./blue clue.png" alt="" class="item" id="bc">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="bci" class="itinfo">This clue from Mar. 來自Mar的線索 <br><button class="btn" id="bcb">Use</button></p>
+                <p id="yci" class="itinfo">This clue from Ghrian. 來自Ghrian的線索 <br><button class="btn" id="ycb">Use</button></p>
+                <p id="haci" class="itinfo">A solid hammer. 一把堅固槌子 <br><button class="btn" id="hacb">Use</button></p>
+                <p id="gi" class="itinfo">The piece of gold with an unknown purpose. 用途不明的黃金 <br><button class="btn" id="gb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    <div class="wm" id="ycw">
+        讀唐吉訶德的小矮人住在鳥巢裡. The dwarf who reads Don Quixote lives in a nest.<br>
+        住中間房子的小矮人喝莓果汁. The dwarf who lives in the middle position drinks berry juice<br>
+        讀The Illiad的小矮人喝樹汁. The dwarf who reads The Iliad drinks tree sap  
+    </div>
+
+    <div class="wm" id="bcw">
+        住在小木屋裡的小矮人喝水果酒. The dwarf who lives in the cabin drinks fruit wine <br>
+        小木屋在樹洞屋的右邊一棟. The cabin is to the right of the tree house<br>
+        Ghrian喜歡讀的書是物種的起源. Ghrian's favorite book is The Origin of Species 
+    </div>
+
+    <div class="wm" id="hacw">
+        似乎沒有作用... <br>
+        It doesn't work... 
+    </div>
+
+    <div class="wm" id="gw">
+        似乎沒有作用 <br>it doesn't work now.
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var reply22 = document.getElementById("reply22");
+        var reply3 = document.getElementById("reply3");
+        var reply4 = document.getElementById("reply4");
+        var talk2 = document.getElementById("talk2");
+        var talk3 = document.getElementById("talk3");
+        //var talk4 = document.getElementById("talk4");
+        //var talk5 = document.getElementById("talk5");
+        var audioPlayed = false;  // Track if audio has already been played
+        var fname = document.getElementById("fname").value;
+        //var landpic = document.getElementById("landpic");
+        //var sage = document.getElementById("sage");
+        //var intro = document.getElementById("intro");
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(253, 145, 3)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        subButton.addEventListener("click", function() {
+            var fname = document.getElementById('fname').value;
+            if(fname == "50"){
+                // Display a warning message as an alert box
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+            }
+            else{
+                alert("還是不對...Wrong again...")
+            }
+
+            
+        });
+
+
+
+
+
+
+        // reply button be clicked
+        reply1.addEventListener("click", function() {
+            talk2.style.display = "block";
+            //landpic.style.display = "none";
+            //sage.style.display = "block";
+            talk1.style.display = "none";
+            reply1.style.display = "none";
+            //intro.style.display = "block";
+        });
+
+        reply2.addEventListener("click", function() {
+            talk3.style.display = "block";
+        });
+
+        
+
+        
+
+        
+
+
+
+
+
+
+            
+
+        hideButton.addEventListener("click", function() {
+            
+            // Hide the text box
+            warningMessage.style.display = "none";
+            audio.play();
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./ch10.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        var yct = document.getElementById('yci');
+        var yci = document.getElementById('yc');
+        var ycb = document.getElementById('ycb');
+        var ycw = document.getElementById('ycw');
+        var bct = document.getElementById('bci');
+        var bci = document.getElementById('bc');
+        var bcb = document.getElementById('bcb');
+        var bcw = document.getElementById('bcw');
+        var hact = document.getElementById('haci');
+        var haci = document.getElementById('hac')
+        var hacb = document.getElementById('hacb')
+        var hacw = document.getElementById('hacw')
+        var gt = document.getElementById('gi');
+        var gi = document.getElementById('g')
+        var gb = document.getElementById('gb')
+        var gw = document.getElementById('gw')
+
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        //
+        yci.addEventListener("click", function() {
+            bct.style.display = "none";
+            yct.style.display = "block";
+            gt.style.display = "none";
+            hact.style.display = "none";
+        });
+
+        
+
+        ycb.addEventListener("click", function() {
+            ycw.style.display = "block";
+            setTimeout(function() {
+                ycw.style.display = "none";
+            }, 3000);    
+        });
+
+
+
+
+
+
+
+
+
+
+        bci.addEventListener("click", function() {
+            yct.style.display = "none";
+            bct.style.display = "block";
+            gt.style.display = "none";
+            hact.style.display = "none";
+        });
+
+        
+
+        bcb.addEventListener("click", function() {
+            bcw.style.display = "block";
+            setTimeout(function() {
+                bcw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+        haci.addEventListener("click", function() {
+            //robt.style.display = "none";
+            hact.style.display = "block";
+            yct.style.display = "none";
+            gt.style.display = "none";
+            bct.style.display = "none";
+        });
+
+        
+
+        hacb.addEventListener("click", function() {
+            hacw.style.display = "block";
+            setTimeout(function() {
+                hacw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+        gi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            gt.style.display = "block";
+            hact.style.display = "none";
+            yct.style.display = "none";
+            bct.style.display = "none";
+            //addresst.style.display = "none";
+        });
+
+        
+
+        gb.addEventListener("click", function() {
+            gw.style.display = "block";
+            setTimeout(function() {
+                gw.style.display = "none";
+            }, 3000);    
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

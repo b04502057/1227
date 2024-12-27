@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch8 Oidhche</title>
+</head>
+<style>
+    body{
+    background-color:rgb(253, 232, 3);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <img src="./mocking bird.png" alt="" style="height: 270px; position: relative; left: 20%;">
+    <br><br>
+    <div id="talk1" style="text-align: center;">接著你打算去找藍色帽子的小矮人，但在路上剛好經過了黑色帽子小矮人的家... <br>Next, you plan to go find bluehat dwarf, but on the way, you happen to pass by blackhat dwarf's house... </div>
+    <div>
+    <button id="reply1">直接進去 <br>Break into</button>
+    </div>
+
+    <p id="intro" style="display: none;">然而黑色小矮人家門用一個四位數密碼鎖鎖起來了 <br>However, the door is locked with a four-digit code</p>
+
+    <div id="talk2" style="display: none; text-align: center;">黑色小矮人養的Mockingbird站在他的郵箱上看你<br>His mocking bird is standing on his mail box and staring at you<br>
+        <div><button id="reply2">跟他打招呼<br>Say hello</button></div>
+        <br><br>
+        <label for="fname" style="color: white;">輸入密碼 The code (ex: 3647): </label>
+        <input type="text" id="fname">
+        <div>
+            <br>
+            <button id="sub">Submit</button>
+        </div>
+    </div>
+
+    
+        
+
+        
+
+    
+        
+    
+    
+
+
+
+    <p><br><br>
+
+
+        
+        
+    </p>
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio3">
+        <source src="./bird.wav" type="audio/wav">
+    </audio>
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">門打開了，你在黑色小矮人的桌上發現槌子... <br>The door is opened. You find a hammer on the table...<br>
+            <br>
+            <br>
+            獲得 槌子 <br> Get hammer
+        
+        </p>
+        <div style="left: 50%;">
+            <button id="hideButton" >Confirm</button>
+        </div>
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./yellow clue.png" alt="" class="item" id="yc">
+        <img src="./gold.png" alt="" class="item" id="g">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="yci" class="itinfo">This clue from Ghrian. 來自Ghrian的線索 <br><button class="btn" id="ycb">Use</button></p>
+                <p id="gi" class="itinfo">The piece of gold with an unknown purpose. 用途不明的黃金 <br><button class="btn" id="gb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    <div class="wm" id="ycw">
+        讀唐吉訶德的小矮人住在鳥巢裡. The dwarf who reads Don Quixote lives in a nest.<br>
+        住中間房子的小矮人喝莓果汁. The dwarf who lives in the middle position drinks berry juice<br>
+        讀The Illiad的小矮人喝樹汁. The dwarf who reads The Iliad drinks tree sap   
+    </div>
+
+    <div class="wm" id="gw">
+        似乎沒有作用 <br>it doesn't work now.
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var audio3 = document.getElementById('myAudio3');
+        var warningMessage = document.getElementById("warningMessage");
+        var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var talk2 = document.getElementById("talk2");
+        var audioPlayed = false;  // Track if audio has already been played
+        var fname = document.getElementById("fname").value;
+        //var landpic = document.getElementById("landpic");
+        //var sage = document.getElementById("sage");
+        var intro = document.getElementById("intro");
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(170, 200, 150)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        subButton.addEventListener("click", function() {
+            var fname = document.getElementById('fname').value;
+            if(fname == "1457"){
+                // Display a warning message as an alert box
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+            }
+            else{
+                alert("打不開...Doesn't work...")
+            }
+
+            
+        });
+
+
+
+
+
+
+        // reply button be clicked
+        reply1.addEventListener("click", function() {
+            talk2.style.display = "block";
+            //landpic.style.display = "none";
+            //sage.style.display = "block";
+            //talk1.style.display = "none";
+            //reply1.style.display = "none";
+            intro.style.display = "block";
+        });
+
+        reply2.addEventListener("click", function() {
+            audio.pause();
+            audio3.play();
+            setTimeout(function() {
+                audio.play();
+            }, 12000); 
+            
+        });
+
+
+
+
+
+            
+
+        hideButton.addEventListener("click", function() {
+            
+            // Hide the text box
+            warningMessage.style.display = "none";
+            audio.play();
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./ch8.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        var yct = document.getElementById('yci');
+        var yci = document.getElementById('yc')
+        var ycb = document.getElementById('ycb')
+        var ycw = document.getElementById('ycw')
+        var gt = document.getElementById('gi');
+        var gi = document.getElementById('g')
+        var gb = document.getElementById('gb')
+        var gw = document.getElementById('gw')
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        //
+        yci.addEventListener("click", function() {
+            //robt.style.display = "none";
+            yct.style.display = "block";
+            gt.style.display = "none";
+        });
+
+        
+
+        ycb.addEventListener("click", function() {
+            ycw.style.display = "block";
+            setTimeout(function() {
+                ycw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+
+        gi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            gt.style.display = "block";
+            yct.style.display = "none";
+            //addresst.style.display = "none";
+        });
+
+        
+
+        gb.addEventListener("click", function() {
+            gw.style.display = "block";
+            setTimeout(function() {
+                gw.style.display = "none";
+            }, 3000);    
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

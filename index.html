@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <title>Preface</title>
+</head>
+<body>
+    <!-- Title picture -->
+    <img src="./main topic.png" alt="" style="height: 300px; position: relative; left: 30%;">
+
+
+
+    <br><br>
+    <p>聖誕老公公躲起來了...今年可能沒有聖誕禮物了... <br><br>Santa Claus is hiding now.... No more dingdingdong...</p>
+    <p></p>
+
+
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+    
+
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">現在，我們要去見躲起來的聖誕老人... <br>Now, we're going to meet Santa...</p>
+        <div style="left: 50%;">
+            <button id="hideButton" >Confirm</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- Question -->
+    <div>
+        <label for="fname">你的名字 your name: </label>
+        <input type="text" id="fname">
+    </div>
+    <div></div>
+    <div>
+        <br>
+        <button id="sub">Submit</button>
+    </div>
+
+
+    
+    <script>
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        var audioPlayed = false;  // Track if audio has already been played
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = '#026826'; // Ending color
+                    document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        subButton.addEventListener("click", function() {
+            // Display a warning message as an alert box
+            //audio.pause();  // Pause the first audio
+            //audio.currentTime = 0;  // Reset to the beginning of the first audio
+            //audio2.play();  // Play the second audio
+            warningMessage.style.display = "block";  // Show the warning message
+        });
+            
+
+        hideButton.addEventListener("click", function() {
+            // Hide the text box
+            warningMessage.style.display = "none";
+            audio.play();
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./second.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+    </script>
+</body>
+</html>

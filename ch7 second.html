@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch7 Ghrian</title>
+</head>
+<style>
+    body{
+    background-color:rgb(50, 150, 50);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    p{
+        color: black;
+    }
+</style>
+<body>
+    <img src="./yellow word.png" alt="" style="height: 270px; position: relative; left: 20%;">
+    <br><br>
+    <div id="talk1" style="text-align: center; color: black;">
+        你在廣場遇見了黃色小矮人Ghrian, 依照長老的說法他是個你會後悔遇過他的小矮人... <br>
+        You encounter yellow hat dwarf Ghrian in the square. According to the sage, he is someone you will regret meeting... <br>
+    </div>
+    <p id="intro" style="display: block;">Ghrian一邊吸著調酒一邊嘻哈的對你說 <br>Ghrian sips his cocktail while casually saying to you</p>
+    <br>
+    <div id="talk2" style="display: block; text-align: center;color: black;"><strong>"Hey bro, おはようございます, what's up??"</strong><br>
+        <br>
+        <div><button id="reply2" style="display: block;">你有拿走聖誕老人的戒指嗎? <br>Did you take the ring from Santa?</button></div>
+    </div>
+
+    <br><br>
+    <div id="talk3" style="display: none; text-align: center; color: black">
+        "damn, man~~. ㄟ不是，蟹，你先聽我說" <br>"damn~, man. Nope, listen"<br> <br>
+        "我bro最近在面最頂的公司，對方有問到一題他答不出來" <br>"My bro has an interview with the top company. You know what? damn~"<br><br>
+        "我是沒有看啦，但畢竟吼，應該是輕輕鬆鬆啦" <br>"But i don't think my bro will get it. Because he is not as good as me. You got it?"<br><br>
+        "然後啊，我最近又去日本玩了" <br>"Holy, this year the third time to japan, I'm not joking now"<br><br>
+        "不是我在講" <br>"Hey, listen"<br><br>
+        "不開玩笑" <br>"Shit bro, this is crazy"<br><br>
+        "真的是，あ~~りがとうございます~~" <br>"How can I say, bro? あ~~りがとうございます~~"<br><br>
+        <div><button id="reply3" style="display: block;">(真想讓他閉嘴) <br>(Can I shut him up)</button></div>
+    </div>
+    <br><br>
+    <div id="talk4" style="display: none; text-align: center; color: black">
+        "ㄟ不是，我來考考你..." <br>"Here is the question..."<br><br>
+        "ㄟ，先幫我倒酒嘛~ 吼~你有沒有社會化啊，看到酒杯就要倒滿啊" <br>"Man, what's wrong with you? You see my glass is empty and you don't fill it up? Holy, do you ever be socialized? Help, man..."<br><br>
+        "所以我剛說到哪? 歐對，蟹，不是我在說..." <br>"Where are we now? oh yes, shit, I'm not joking..."<br><br>
+        <div><img src="./taiwan beer.png" alt="" id="tb" style="width: 10%;"><p>颱彎啤酒 <br>Thaiwan beer</p></div>
+        <div><img src="./red wine.png" alt="" id="rw" style="width: 10%;"><p>紅酒 <br>red wine</p></div>
+    </div>
+
+
+        
+    
+    
+    
+    
+    
+
+
+
+    <p><br><br>
+
+
+        
+        
+    </p>
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">Ghrian醉到睡著了，從口袋裡掉出一張紙條 <br>Ghrian gets so drunk that he falls asleep, and a note falls out of his pocket <br>
+            <br>
+            獲得 Ghrian的線索 <br> Get the clues from Ghrian
+        <br><br>
+            把他丟著去找下一個人吧 <br> Let's leave him here and go find another dwarf
+        </p>
+        <div style="left: 50%;">
+            <button id="hideButton" >Confirm</button>
+        </div>
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./gold.png" alt="" class="item" id="g">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="addressi" class="itinfo">This paper list out 5 number. 這張紙上有五個數字 <br><button class="btn" id="addressb">Use</button></p>
+                <p id="gi" class="itinfo">The piece of gold with an unknown purpose. 用途不明的黃金 <br><button class="btn" id="gb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    <div class="wm" id="addressw">
+        你將五個小矮人的資訊交給長老. <br>
+        You give the info of the five dwarfs to the sage. 
+    </div>
+
+    <div class="wm" id="gw">
+        似乎沒有作用 <br>it doesn't work now.
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        //var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        //var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var reply3 = document.getElementById("reply3");
+        var talk2 = document.getElementById("talk2");
+        var talk3 = document.getElementById("talk3");
+        var talk4 = document.getElementById("talk4");
+        var audioPlayed = false;  // Track if audio has already been played
+        //var fname = document.getElementById("fname").value;
+        //var landpic = document.getElementById("landpic");
+        //var sage = document.getElementById("sage");
+        var intro = document.getElementById("intro");
+        var tb = document.getElementById("tb");
+        var rw = document.getElementById("rw");
+        var rc = 0;
+        var tc = 0;
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(253, 232, 3)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    //document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        
+
+
+
+
+
+
+        // reply button be clicked
+        //reply1.addEventListener("click", function() {
+            //talk2.style.display = "block";
+            //landpic.style.display = "none";
+            //sage.style.display = "block";
+            //talk1.style.display = "none";
+            //reply1.style.display = "none";
+            //intro.style.display = "block";
+        //});
+
+        reply2.addEventListener("click", function() {
+            talk3.style.display = "block";
+        });
+
+        reply3.addEventListener("click", function() {
+            talk4.style.display = "block";
+        });
+
+        rw.addEventListener("click", function() {
+            rc = rc + 1;
+            if(rc>5){
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+            }
+            else{
+                alert("紅酒啊? 你瞧不起我是不是啊? ... Red wine? really? red wine? that is for college students...");
+            }
+        });
+
+        tb.addEventListener("click", function() {
+            tc = tc + 1;
+            if(tc>11){
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+
+            }
+            else{
+                alert("來，我跟你說，沒有，不是，是這樣的.... Hey, listen, no, you're wrong, definitely wrong. Listen...");
+            }
+        });
+
+
+
+            
+
+        hideButton.addEventListener("click", function() {
+            
+            // Hide the text box
+            warningMessage.style.display = "none";
+            audio.play();
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./ch7-2.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        var addresst = document.getElementById('addressi');
+        var addressi = document.getElementById('address')
+        var addressb = document.getElementById('addressb')
+        var addressw = document.getElementById('addressw')
+        var gt = document.getElementById('gi');
+        var gi = document.getElementById('g')
+        var gb = document.getElementById('gb')
+        var gw = document.getElementById('gw')
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        
+
+        gi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            gt.style.display = "block";
+            //addresst.style.display = "none";
+        });
+
+        
+
+        gb.addEventListener("click", function() {
+            gw.style.display = "block";
+            setTimeout(function() {
+                gw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

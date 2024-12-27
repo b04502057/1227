@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch13 The Ring</title>
+</head>
+<style>
+    body{
+    background-color:rgb(35, 35, 35);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <img src="./prison.png" alt="" style="height: 270px; position: relative; left: 20%;">
+    <br><br>
+    <div id="talk1" style="text-align: center; color: black;">"真沒想到會是你" <br>"I really didn't expect it to be you" <br><br></div>
+    <div>
+    <button id="reply1">你把戒指放在哪裡 <br>Where do you put the ring</button>
+    </div>
+
+    <p id="intro" style="display: none;"></p>
+
+    <div id="talk2" style="display: none; text-align: center; color: black;">"Mar給我的戒指嗎?在我書桌上阿" <br>"The ring from Mar? On my table" <br><br>
+        "ㄟ不是，你先聽我說，我跟你說，坐牢超刺激的..." <br>"Hey, hey, hey, forget the ring, dude. Listen. Jail is so exciting..." <br><br>
+        <div><button id="reply2">掛掉電話去找戒指 <br>Ignore Ghrian and go to find the ring</button></div>
+    </div>
+
+
+    <div id="talk3" style="display: none; text-align: center; color: black;">
+        <br>你飛快地趕到Ghrian家，在桌上找到了戒指... <br>You run to the house of Ghrian and find the ring on the table...<br><br>
+        <img src="./ring 4.png" alt="" style="width: 10%;"> <br><br>
+        "這就是詛咒的戒指，要趕快把它破壞掉"<br>"It is the cursed ring. I must destroy it as soon as possible."<br>
+
+    </div>
+    
+
+    
+
+
+        
+        
+ 
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">你拯救了聖誕節<br>You save christmas <br>
+            <br>
+            聖誕老人終於能安心上工了<br>Santa is back to work<br><br>
+            一切恢復和平，除了Ghrian繼續在為他的宗教罪坐牢... <br>Everything has returned to peace, except for Ghrian, who continues to sit in prison for his religious crimes...<br> <br>
+            <br>
+            <h1 style="text-align: center;"><strong>THE END</strong></h1>
+
+            <p style="text-align: center; color: white;">BTW如果你是彰化陳小姐你的聖誕禮物我用膠帶貼在你書桌底下</p>
+            
+            
+        
+        </p>
+        
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./hammer.png" alt="" class="item" id="hac">
+        <img src="./gold.png" alt="" class="item" id="g">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="gi" class="itinfo">The piece of gold with an unknown purpose. 用途不明的黃金 <br><button class="btn" id="gb">Use</button></p>
+                <p id="haci" class="itinfo">The hammer from Oidche. Oidhche的槌子 <br><button class="btn" id="hacb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    
+
+    <div class="wm" id="hacw">
+        你成功破壞了戒指! <br>You destroy the ring!
+    </div>
+
+    <div class="wm" id="gw">
+        似乎沒有作用 <br>it doesn't work now.
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        //var subButton = document.getElementById("sub");
+        //var hideButton = document.getElementById("hideButton");
+        var audioPlayed = false;  // Track if audio has already been played
+        //var fname = document.getElementById("fname").value;
+        var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var talk2 = document.getElementById("talk2");
+        var talk3 = document.getElementById("talk3");
+
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(253, 240, 3)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(2, 2, 2)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        
+
+
+
+
+
+
+         // reply button be clicked
+         reply1.addEventListener("click", function() {
+            talk2.style.display = "block";
+            //landpic.style.display = "none";
+            //sage.style.display = "block";
+            talk1.style.display = "none";
+            reply1.style.display = "none";
+            //intro.style.display = "block";
+        });
+
+        reply2.addEventListener("click", function() {
+            talk3.style.display = "block";
+        });
+
+
+
+
+
+
+
+     
+
+        
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        
+        var hact = document.getElementById('haci');
+        var haci = document.getElementById('hac')
+        var hacb = document.getElementById('hacb')
+        var hacw = document.getElementById('hacw')
+        var gt = document.getElementById('gi');
+        var gi = document.getElementById('g')
+        var gb = document.getElementById('gb')
+        var gw = document.getElementById('gw')
+
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        haci.addEventListener("click", function() {
+            //robt.style.display = "none";
+            hact.style.display = "block";
+            gt.style.display = "none";
+        });
+
+        
+
+        hacb.addEventListener("click", function() {
+            hacw.style.display = "block";
+            setTimeout(function() {
+                hacw.style.display = "none";
+            }, 3000); 
+            setTimeout(function() {
+                warningMessage.style.display = "block";
+            }, 3000);   
+        });
+
+        
+
+
+        gi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            gt.style.display = "block";
+            hact.style.display = "none";
+            //addresst.style.display = "none";
+        });
+
+        
+
+        gb.addEventListener("click", function() {
+            gw.style.display = "block";
+            setTimeout(function() {
+                gw.style.display = "none";
+            }, 3000);    
+        });
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch6 The Land of Dwarf</title>
+</head>
+<style>
+    body{
+    background-color:rgb(100, 100, 100);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <img src="./land.png" alt="" style="height: 270px; position: relative; left: 20%;" id="landpic">
+    <img src="./the sage dwarf.png" alt="" style="height: 270px; position: relative; left: 20%; display: none;" id="sage">
+    <br><br>
+    <div id="talk1" style="text-align: center;">"這就是小矮人的土地..." <br>This is the land of dwarf...</div>
+    <div>
+    <button id="reply1">進入小矮人的世界 <br>enter the land</button>
+    </div>
+
+    <p id="intro" style="display: none;">你見到了小矮人長老，他是一位沉穩的魔法師，身邊的灰塵都因他的魔力而被吹動著... <br>You see the sage, a composed magician, whose magic causes the dust around him to swirl....</p>
+
+    <div id="talk2" style="display: none; text-align: center;">"藍色帽子的朋友，請問你要做什麼呢?" <br>"The friend with the blue hat, may I ask what you intend to do?"<br>
+        <div><button id="reply2" style="display: none;">我準備好了...</button></div>
+    </div>
+
+    <div id="talk3" style="display: none; text-align: center;">
+        <br><br>
+
+        長老看著你給的紙張說 <br>The sage gazes at the paper and says<br><br>
+        "是地址的順位，由小到大" <br>"It is the order of the address, from smallest to largest"<br> <br>
+        "小矮人沒有能力抵禦外族的入侵，因此會用各種隱密的方法表達資訊" <br>"We dwarf do not have the ability to resist foreign invasions, so we use various covert methods to convey information"<br><br>
+        "上面寫你要找的住址分別是第79, 105, 177, 254, 288" <br>"The addresses you are looking for are 79th, 105th, 177th, 254th, and 288th"<br><br>
+        長老找出了一本書，上面有紀錄所有小矮人的住址... <br>The sage finds a book that records the addresses of every dwarf...<br><br>
+        [2874, 8455, 5700, 7882, 8298, 3214, 4197, 9603, 360, 4137, 5477, 7756, 1800, 8052, 7049, 4837, 1809, 9606, 2125, 9875, 5516, 2657, 7749, 5740, 4530, 6391, 7264, 571, 1915, 7475, 3957, 822, 6061, 5540, 5281, 6943, 8467, 4895, 8090, 9242, 2281, 6405, 227, 5167, 4389, 4162, 5818, 6170, 3877, 6009, 8520, 5652, 909, 3337, 7016, 2937, 8627, 405, 5912, 8144, 5041, 4102, 7162, 2357, 2753, 473, 6409, 7958, 2687, 8920, 2525, 1472, 6948, 9352, 869, 3901, 5865, 5922, 3111, 161, 9751, 3528, 2055, 6411, 9269, 5873, 1702, 1847, 6939, 8973, 4890, 5695, 5552, 774, 1838, 9761, 6256, 5016, 390, 9802, 7978, 5429, 7010, 82, 366, 3207, 2745, 1844, 2427, 5941, 9977, 628, 299, 2285, 9119, 3319, 7518, 7879, 4035, 7955, 3, 6382, 4943, 347, 6646, 7831, 9476, 8902, 1381, 1561, 3960, 3584, 4665, 3757, 228, 7575, 8766, 7153, 1395, 9695, 2955, 6478, 4408, 5484, 5104, 1815, 3261, 4412, 8996, 9151, 3644, 6393, 9280, 1505, 3881, 4490, 6057, 6218, 2888, 9258, 5682, 3793, 3689, 3161, 5947, 5204, 60, 6631, 8670, 4609, 4734, 7856, 5382, 5042, 5242, 3094, 9462, 723, 4273, 7141, 7130, 3433, 5813, 5494, 5427, 6849, 7578, 5465, 9771, 4717, 5918, 3140, 6111, 8408, 8148, 894, 712, 2541, 1738, 5766, 351, 5669, 4654, 6832, 3153, 4475, 2218, 9819, 9421, 335, 8420, 6180, 3342, 356, 4492, 2817, 7560, 1134, 2771, 8552, 8589, 7972, 8697, 6676, 4636, 96, 1621, 8002, 2067, 3888, 1629, 345, 4325, 9564, 5806, 9891, 5140, 1572, 1140, 4479, 2066, 8723, 2590, 9532, 97, 9864, 9661, 8958, 4538, 8403, 6692, 1973, 6130, 6451, 6193, 618, 8821, 9696, 8727, 9107, 1579, 312, 476, 1028, 952, 463, 7533, 2199, 8779, 1943, 4452, 3424, 6641, 4776, 3119, 5796, 7942, 6725, 3368, 530, 2348, 2883, 4667, 8901, 6791, 3794, 4825, 6899, 7832, 1497, 2576, 5930, 5521, 6958, 4280, 8421, 4570, 9058, 4459, 9442]
+        <br><br><br>
+    <div>
+
+        <label for="fname" style="color: white;">請找出五個地址. Find out the five address(ex:35,234,543,1234,5249): </label>
+        <input type="text" id="fname">
+    </div>
+
+    
+        
+    
+    <div>
+        <br>
+        <button id="sub">Submit</button>
+    </div>
+    </div>
+    
+
+
+
+    <p><br><br>
+
+
+        
+        
+    </p>
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">長老給你這五個小矮人的帽子碎片，它會引導你到他們所在的位置 <br>The sage gives you a part of each of their hat, these clothes will lead you to them <br>
+            <br>
+            使用 五個帽子碎片 <br> Use the part of the five hats
+        <br><br>
+            "那個小矮人很有可能把戒指拿去當作自己的幸運物了" <br> "That person is likely using the ring as their lucky charm" <br><br>
+            長老這時候偷偷剪下了你帽子的一小角.... <br> The sage secretly cut off a little part of your hat...
+        </p>
+        <div style="left: 50%;">
+            <button id="hideButton" >Confirm</button>
+        </div>
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./5 d info.png" alt="" class="item" id="address">
+        <img src="./gold.png" alt="" class="item" id="g">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="addressi" class="itinfo">The info of the five dwarfs. 五個小矮人的資訊 <br><button class="btn" id="addressb">Use</button></p>
+                <p id="gi" class="itinfo">The piece of gold with an unknown purpose. 用途不明的黃金 <br><button class="btn" id="gb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    <div class="wm" id="addressw">
+        你將五個小矮人的資訊交給長老. <br>
+        You give the info of the five dwarfs to the sage. 
+    </div>
+
+    <div class="wm" id="gw">
+        似乎沒有作用 <br>it doesn't work now.
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var talk2 = document.getElementById("talk2");
+        var talk3 = document.getElementById("talk3");
+        var audioPlayed = false;  // Track if audio has already been played
+        var fname = document.getElementById("fname").value;
+        var landpic = document.getElementById("landpic");
+        var sage = document.getElementById("sage");
+        var intro = document.getElementById("intro");
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(50, 150, 50)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        subButton.addEventListener("click", function() {
+            var fname = document.getElementById('fname').value;
+            if(fname == "2817,3793,5865,8467,9606"){
+                // Display a warning message as an alert box
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+            }
+            else{
+                alert("應該有錯，這幾個小矮人並沒有到人類世界工作...It must be wrong, these dwarfs have never work in human world...")
+            }
+
+            
+        });
+
+
+
+
+
+
+        // reply button be clicked
+        reply1.addEventListener("click", function() {
+            talk2.style.display = "block";
+            landpic.style.display = "none";
+            sage.style.display = "block";
+            talk1.style.display = "none";
+            reply1.style.display = "none";
+            intro.style.display = "block";
+        });
+
+        reply2.addEventListener("click", function() {
+            talk3.style.display = "block";
+        });
+
+
+
+
+
+
+            
+
+        hideButton.addEventListener("click", function() {
+            
+            // Hide the text box
+            warningMessage.style.display = "none";
+            audio.play();
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./ch7 second.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        var addresst = document.getElementById('addressi');
+        var addressi = document.getElementById('address')
+        var addressb = document.getElementById('addressb')
+        var addressw = document.getElementById('addressw')
+        var gt = document.getElementById('gi');
+        var gi = document.getElementById('g')
+        var gb = document.getElementById('gb')
+        var gw = document.getElementById('gw')
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        //
+        addressi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            addresst.style.display = "block";
+            gt.style.display = "none";
+        });
+
+        
+
+        addressb.addEventListener("click", function() {
+            addressw.style.display = "block";
+            setTimeout(function() {
+                addressw.style.display = "none";
+                talk3.style.display = "block";
+                addressi.style.display = "none";
+            }, 3000);    
+        });
+
+        gi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            gt.style.display = "block";
+            addresst.style.display = "none";
+        });
+
+        
+
+        gb.addEventListener("click", function() {
+            gw.style.display = "block";
+            setTimeout(function() {
+                gw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

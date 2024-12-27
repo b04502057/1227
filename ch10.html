@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch11 Ubhal</title>
+</head>
+<style>
+    body{
+    background-color:rgb(253, 145, 3);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <img src="./red word.png" alt="" style="height: 270px; position: relative; left: 20%;">
+    <br><br>
+    <div id="talk1" style="text-align: center;">你在教堂找到了Ubhal, Ubhal正和教友圍在一起憤怒的禱告 <br>You find Ubhal at the church. He is praying angrily with other members...</div>
+    <div>
+    <button id="reply1">等他 <br>Wait for him</button>
+    </div>
+
+    <p id="intro" style="display: none;"></p>
+
+    <div id="talk2" style="display: none; text-align: center;">這似乎不會停止... <br>This prayer seems like it will never stop...<br>
+        <div><button id="reply2">詢問發生了什麼事 <br>What's up</button></div>
+    </div>
+
+
+    <div id="talk3" style="display: none; text-align: center;">
+        <br>
+        "教主被害死了! 教主被害死了! 我們誓言要找出兇手!" <br>"The god has been murdered! The god has been murdered! We vow to find the criminal!"<br><br><br>
+        教主在兩周前遭到綁架，現在沒有人知道教主身在何處... <br>The god was kidnapped two weeks ago, and now no one knows where the god is...<br><br>
+        唯一的線索只有一張教主被抓走前一天晚餐與他的門徒的合照... <br>The only clue is a photo of the god having dinner with his disciples the day before he was kidnapped... <br><br><br>
+        <img src="./last supper.png" alt="" style="width: 30%;"><br><br>
+
+        <label for="fname" style="color: white;">左邊數來第頂帽子是犯人 Which hat from the left is the criminal? (ex:10) : </label>
+        <input type="text" id="fname">
+        <div>
+            <br>
+            <button id="sub">Submit</button>
+        </div>
+    </div>
+    
+
+
+
+    <p><br><br>
+
+
+        
+        
+    </p>
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">原來兇手正是Ghrian，他被移送法辦了<br>It turns out the criminal was Ghrian, and he has been taken into custody for prosecution...<br>
+            <br><br>
+            
+            獲得 Ubhal的線索 <br> Get the clues from Ubhal <br> <br>
+            獲得 神啟的線索 <br> Get the clues from the holy
+        
+        </p>
+        <div style="left: 50%;">
+            <button id="hideButton" >結合線索 <br>Combine the clues</button>
+        </div>
+        <div id="last" style="display: none;">
+            1. 有五棟房子 <br>(sage)
+            2. Ubhal住在石頭屋裡 <br>(Ubhal)
+            3. Oidhche的幸運物是槌子<br>(Craobh)
+            4. 住在小木屋裡的小矮人喝水果酒 <br>(mar) The dwarf lives in caban drink fruit wine
+            5. Mar喝麥酒<br>(ubhal) Mar drink Ale
+            6. 小木屋在Craobh家的右邊一棟<br>(mar) The caban house is immediately to the right of the craobh house.
+            7. 讀聖經的小矮人的幸運物是石頭<br>(craobh) The dwarf reading dible owns stone.
+            8. 讀唐吉訶德的小矮人住在鳥巢裡<br>(ghrian) The novel Donxicote is in the nead house.
+            9. 住中間房子的小矮人喝莓果汁<br>(ghrian) Berry juice is drunk in the middle house.
+            10. Craobh住在最左邊的房子<br>(craobh) Craobh lives in the first house.
+            11. 讀The republic的小矮人住在幸運物是樹葉的小矮人的旁邊<br>(sage) The man who read The perublic lives in the house next to the man with the leaf.
+            12. 讀唐吉訶德的小矮人住在幸運物是鏟子的小矮人家的旁邊<br>(sage) Donxicote is read in the house next to the house where there is a shovel.
+            13. 讀The Illiad的小矮人喝樹汁<br>(ghrian) The illiad smoker drinks tree juice.
+            14. Ghrian喜歡讀的書是物種的起源<br>(mar) Ghrian reads the origin of the species
+            15. Craobh住在石頭屋旁邊<br>(ubhal) Craobh lives next to the blue Clach mhor.
+        </div>
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./yellow clue.png" alt="" class="item" id="yc">
+        <img src="./hammer.png" alt="" class="item" id="hac">
+        <img src="./gold.png" alt="" class="item" id="g">
+        <img src="./blue clue.png" alt="" class="item" id="bc">
+        <img src="./brown clue.png" alt="" class="item" id="wc">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="bci" class="itinfo">The clue from Mar. 來自Mar的線索 <br><button class="btn" id="bcb">Use</button></p>
+                <p id="yci" class="itinfo">The clue from Ghrian. 來自Ghrian的線索 <br><button class="btn" id="ycb">Use</button></p>
+                <p id="haci" class="itinfo">A solid hammer. 一把堅固槌子 <br><button class="btn" id="hacb">Use</button></p>
+                <p id="gi" class="itinfo">The piece of gold with an unknown purpose. 用途不明的黃金 <br><button class="btn" id="gb">Use</button></p>
+                <p id="wci" class="itinfo">The clue from Craobh. 來自Craobh的線索 <br><button class="btn" id="wcb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    <div class="wm" id="ycw">
+        讀唐吉訶德的小矮人住在鳥巢裡. The dwarf who reads Don Quixote lives in a nest.<br>
+        住中間房子的小矮人喝莓果汁. The dwarf who lives in the middle position drinks berry juice<br>
+        讀The Illiad的小矮人喝樹汁. The dwarf who reads The Iliad drinks tree sap 
+    </div>
+
+    <div class="wm" id="bcw">
+        住在小木屋裡的小矮人喝水果酒. The dwarf who lives in the cabin drinks fruit wine <br>
+        小木屋在樹洞屋的右邊一棟. The cabin is to the right of the tree house<br>
+        Ghrian喜歡讀的書是物種的起源. Ghrian's favorite book is The Origin of Species 
+    </div>
+
+    <div class="wm" id="hacw">
+        似乎沒有作用... <br>
+        It doesn't work... 
+    </div>
+
+    <div class="wm" id="gw">
+        似乎沒有作用 <br>it doesn't work now.
+    </div>
+
+    <div class="wm" id="wcw">
+        Oidhche的幸運物是槌子. Oidhche's lucky charm is a hammer<br>
+        讀聖經的小矮人的幸運物是石頭. The dwarf who reads the Bible's lucky charm is a stone<br>
+        我住在最左邊的房子. I live in the house on the far left
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var reply22 = document.getElementById("reply22");
+        var reply3 = document.getElementById("reply3");
+        var reply4 = document.getElementById("reply4");
+        var talk2 = document.getElementById("talk2");
+        var talk3 = document.getElementById("talk3");
+        //var talk4 = document.getElementById("talk4");
+        //var talk5 = document.getElementById("talk5");
+        var audioPlayed = false;  // Track if audio has already been played
+        var fname = document.getElementById("fname").value;
+        //var landpic = document.getElementById("landpic");
+        //var sage = document.getElementById("sage");
+        //var intro = document.getElementById("intro");
+        var last = document.getElementById("last");
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(253, 3, 3)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        subButton.addEventListener("click", function() {
+            var fname = document.getElementById('fname').value;
+            if(fname == "4"){
+                // Display a warning message as an alert box
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+            }
+            else if(fname == "7"){
+                alert("那是教主本人...That is the god...")
+            }
+            else{
+                alert("糟了，Ubhal他們好像扁錯人了...Oh oh, Ubhal and members seem to hit the wrong guy...")
+            }
+
+            
+        });
+
+
+
+
+
+
+        // reply button be clicked
+        reply1.addEventListener("click", function() {
+            talk2.style.display = "block";
+            //landpic.style.display = "none";
+            //sage.style.display = "block";
+            talk1.style.display = "none";
+            reply1.style.display = "none";
+            //intro.style.display = "block";
+        });
+
+        reply2.addEventListener("click", function() {
+            talk3.style.display = "block";
+            
+        });
+
+        
+
+        
+
+        
+
+
+
+
+
+
+            
+
+        hideButton.addEventListener("click", function() {
+            
+            // Hide the text box
+            
+            warningMessage.style.display = "none";
+            
+            audio.play();
+            
+
+            
+
+
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./ch11.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        var yct = document.getElementById('yci');
+        var yci = document.getElementById('yc');
+        var ycb = document.getElementById('ycb');
+        var ycw = document.getElementById('ycw');
+        var bct = document.getElementById('bci');
+        var bci = document.getElementById('bc');
+        var bcb = document.getElementById('bcb');
+        var bcw = document.getElementById('bcw');
+        var hact = document.getElementById('haci');
+        var haci = document.getElementById('hac')
+        var hacb = document.getElementById('hacb')
+        var hacw = document.getElementById('hacw')
+        var gt = document.getElementById('gi');
+        var gi = document.getElementById('g')
+        var gb = document.getElementById('gb')
+        var gw = document.getElementById('gw')
+        var wct = document.getElementById('wci');
+        var wci = document.getElementById('wc')
+        var wcb = document.getElementById('wcb')
+        var wcw = document.getElementById('wcw')
+
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        //
+        yci.addEventListener("click", function() {
+            hact.style.display = "none";
+            yct.style.display = "block";
+            gt.style.display = "none";
+            bct.style.display = "none";
+            wct.style.display = "none";
+        });
+
+        
+
+        ycb.addEventListener("click", function() {
+            ycw.style.display = "block";
+            setTimeout(function() {
+                ycw.style.display = "none";
+            }, 3000);    
+        });
+
+
+
+
+
+
+
+
+
+
+        bci.addEventListener("click", function() {
+            hact.style.display = "none";
+            yct.style.display = "none";
+            gt.style.display = "none";
+            bct.style.display = "block";
+            wct.style.display = "none";
+        });
+
+        
+
+        bcb.addEventListener("click", function() {
+            bcw.style.display = "block";
+            setTimeout(function() {
+                bcw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+        haci.addEventListener("click", function() {
+            //robt.style.display = "none";
+            hact.style.display = "block";
+            yct.style.display = "none";
+            gt.style.display = "none";
+            bct.style.display = "none";
+            wct.style.display = "none";
+        });
+
+        
+
+        hacb.addEventListener("click", function() {
+            hacw.style.display = "block";
+            setTimeout(function() {
+                hacw.style.display = "none";
+            }, 3000);    
+        });
+
+        
+
+
+        gi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            gt.style.display = "block";
+            hact.style.display = "none";
+            yct.style.display = "none";
+            bct.style.display = "none";
+            wct.style.display = "none";
+            //addresst.style.display = "none";
+        });
+
+        
+
+        gb.addEventListener("click", function() {
+            gw.style.display = "block";
+            setTimeout(function() {
+                gw.style.display = "none";
+            }, 3000);    
+        });
+
+
+
+        wci.addEventListener("click", function() {
+            //robt.style.display = "none";
+            gt.style.display = "none";
+            hact.style.display = "none";
+            yct.style.display = "none";
+            bct.style.display = "none";
+            wct.style.display = "block";
+            //addresst.style.display = "none";
+        });
+
+        
+
+        wcb.addEventListener("click", function() {
+            wcw.style.display = "block";
+            setTimeout(function() {
+                wcw.style.display = "none";
+            }, 3000);    
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

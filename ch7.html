@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css2.css">
+    <title>Ch7 Ghrian</title>
+</head>
+<style>
+    body{
+    background-color:rgb(50, 150, 50);
+    transition: background-color 6s ease-in-out, opacity 5s ease-in-out; /* 600 seconds = 10 minutes */
+    }
+
+    .item{
+        width: 22%;
+        height: auto;
+    }
+    .itinfo{
+        display: none;
+        color: rgb(9, 9, 9);
+        width: 100%;
+    }
+    .wm{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <img src="./yellow.png" alt="" style="height: 270px; position: relative; left: 26%;">
+    <p id="intro" style="display: none;">你遇見了黃色小矮人Ghrian, 依照長老的說法他是個你會後悔遇過他的小矮人...</p>
+
+    <div id="talk2" style="display: none; text-align: center;">"藍色帽子的朋友，請問你要做什麼呢?"<br>
+        <div><button id="reply2" style="display: none;">我準備好了...</button></div>
+    </div>
+
+    <div id="talk3" style="display: none; text-align: center;">
+        <br><br>
+        "是地址的順<br><br><br>
+        <div>
+            <label for="fname" style="color: white;">請找出五個地址(ex:35,234,543,1234,5249): </label>
+            <input type="text" id="fname">
+        </div>
+
+    
+        
+    
+        <div>
+            <br>
+            <button id="sub">Submit</button>
+        </div>
+    </div>
+    
+
+
+
+    <p><br><br>
+
+
+        
+        
+    </p>
+
+    <!-- Background music -->
+    <audio id="myAudio" loop>
+        <source src="./LOD.wav" type="audio/wav">
+    </audio>
+    <audio id="myAudio2">
+        <source src="./earn.wav" type="audio/wav">
+    </audio>
+
+    
+
+    <!-- Passing message -->
+    <div id="warningMessage">
+        <p style="color: white;">"好像正確喔，來，給你他們的帽子碎片，它會引導你到他們所在的位置" <br>It seems to be right. It is a part of each of their hat, these clothes will lead you to them <br>
+            <br>
+            使用 五個帽子碎片 <br> Use the part of the five hats
+        <br><br>
+            長老這時候偷偷剪下了你帽子的一小角.... <br> The sage secretly cut off a little part of your hat...
+        </p>
+        <div style="left: 50%;">
+            <button id="hideButton" >Confirm</button>
+        </div>
+    </div>
+
+
+
+
+
+    <img src="./bag4.png" alt="" id="doo" style="width: 5%; position: fixed; bottom: 4%;">
+    
+
+    <div id="bag map" style="display: none; background-color: rgb(254, 253, 252); width: 15%; padding: 3px;border-style: dashed; border-color: rgb(193, 142, 13); border-radius: 10px; position: fixed; bottom: 18%;" >
+        <p style="text-align: center;">Items</p>
+        <img src="./5 d info.png" alt="" class="item" id="address">
+        <div style="left: 50%;">
+            <div id="tt" style="width: 100%; background-color:rgb(254, 254, 253);">
+                <p id="addressi" class="itinfo">This paper list out 5 number. 這張紙上有五個數字 <br><button class="btn" id="addressb">Use</button></p>
+            </div><br>
+            <button id="hideButtonbag" style="justify-content: center;">Confirm</button>
+        </div>
+    </div>
+
+    <div class="wm" id="addressw">
+        你將五個小矮人的資訊交給長老. <br>
+        You give the info of the five dwarfs to the sage. 
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript to play audio on any click -->
+    <script>
+
+
+        // Get the element
+        var audio = document.getElementById('myAudio');
+        var audio2 = document.getElementById('myAudio2');
+        var warningMessage = document.getElementById("warningMessage");
+        var subButton = document.getElementById("sub");
+        var hideButton = document.getElementById("hideButton");
+        var reply1 = document.getElementById("reply1");
+        var reply2 = document.getElementById("reply2");
+        var talk2 = document.getElementById("talk2");
+        var talk3 = document.getElementById("talk3");
+        var audioPlayed = false;  // Track if audio has already been played
+        var fname = document.getElementById("fname").value;
+        var landpic = document.getElementById("landpic");
+        var sage = document.getElementById("sage");
+        var intro = document.getElementById("intro");
+
+        // Add an event listener for the 'click' event on the whole document
+        document.addEventListener('click', function() {
+            if (!audioPlayed) {  // Ensure audio only plays once
+                // Start the audio playback when the user clicks anywhere
+                audio.play();
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'rgb(235, 252, 6)'; // Ending color
+                    //document.querySelector('label').style.color = 'rgb(251, 251, 251)';
+                    document.querySelector('p').style.color = 'rgb(251, 251, 251)';
+                }, 0); // Start immediately after the page loads
+                audioPlayed = true;  // Mark that the audio has played
+            }
+        });
+
+        // Submit button be clicked
+        subButton.addEventListener("click", function() {
+            var fname = document.getElementById('fname').value;
+            if(fname == "2817,3793,5865,8467,9606"){
+                // Display a warning message as an alert box
+                audio.pause();  // Pause the first audio
+                //audio.currentTime = 0;  // Reset to the beginning of the first audio
+                audio2.play();  // Play the second audio
+                warningMessage.style.display = "block";  // Show the warning message
+            }
+            else{
+                alert("感覺好像有錯ㄟ，但也不一定啦，畢竟法律是禁止對這份名單使用排序魔法的嘛...That might be wrong. But who knows? nobody can use order magic...")
+            }
+
+            
+        });
+
+
+
+
+
+
+        // reply button be clicked
+        reply1.addEventListener("click", function() {
+            talk2.style.display = "block";
+            landpic.style.display = "none";
+            sage.style.display = "block";
+            talk1.style.display = "none";
+            reply1.style.display = "none";
+            intro.style.display = "block";
+        });
+
+        reply2.addEventListener("click", function() {
+            talk3.style.display = "block";
+        });
+
+
+
+
+
+
+            
+
+        hideButton.addEventListener("click", function() {
+            
+            // Hide the text box
+            warningMessage.style.display = "none";
+            audio.play();
+            setTimeout(function() {
+                // Change the page's opacity
+                document.body.style.opacity = 0; // Fade out the whole page
+            }, 10); // Small delay before changing opacity
+
+            // Redirect to another page after a short delay
+            setTimeout(function() {
+                window.location.href = "./ch7.html"; // Redirect to the second page
+            }, 5000); // Wait 1 second (matching the opacity transition duration)
+        });
+
+        
+        // bag
+        var bag = document.getElementById('doo');
+        var bagmap = document.getElementById("bag map");
+        var hideButtonbag = document.getElementById("hideButtonbag");
+        var addresst = document.getElementById('addressi');
+        var addressi = document.getElementById('address')
+        var addressb = document.getElementById('addressb')
+        var addressw = document.getElementById('addressw')
+
+        bag.addEventListener("click", function() {
+            bagmap.style.display = "block";
+        });
+
+        hideButtonbag.addEventListener("click", function() {
+            // Hide the text box
+            bagmap.style.display = "none";
+        });
+
+        //
+        addressi.addEventListener("click", function() {
+            //robt.style.display = "none";
+            addresst.style.display = "block";
+        });
+
+        
+
+        addressb.addEventListener("click", function() {
+            addressw.style.display = "block";
+            setTimeout(function() {
+                addressw.style.display = "none";
+                talk3.style.display = "block"
+            }, 3000);    
+        });
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
